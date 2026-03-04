@@ -1,0 +1,110 @@
+Table lexical_unit {
+    id int [pk]
+    is_dict_entry boolean
+    is_dialect boolean
+    is_mwlu boolean
+}
+
+Table lemma {
+  id int [pk]
+  lemma text
+}
+
+Table dict_entry {
+    id int [pk, ref: > lexical_unit.id]
+    lemma_id int [ref: > lemma.id]
+    pos text
+}
+
+Table verb_lemma {
+    id int [pk, ref: > dict_entry.id]
+    present_root text
+    past_root text
+    is_transitive boolean
+}
+
+Table verb_transitive_intransitive {
+    id int [pk, ref: > verb_lemma.id]
+    transitive_lemma text
+    intransitive_lemma text
+}
+
+Table dialect {
+  western boolean
+  eastern boolean
+  dialect_code int
+}
+
+Table lexical_unit_dialect {
+  lexical_unit_id int [ref: > lexical_unit.id]
+  dialect_code int [ref: > dialect.dialect_code]
+}
+
+Table morpheme {
+  id int [ref: > lexical_unit.id]
+  is_independent boolean
+}
+
+Table independent_morpheme {
+  id int [ref: > morpheme.id]
+  is_prefix boolean
+  is_suffix boolean
+}
+
+Table prefix_morpheme {
+  id int [ref: > independent_morpheme.id]
+  is_derivational boolean
+}
+
+Table suffix_morpheme {
+  id int [ref: > independent_morpheme.id]
+  is_person_number boolean
+  is_object boolean
+}
+
+Table mwlu {
+    id int [pk, ref: > lexical_unit.id]
+    continuation_class text
+}
+
+Table form {
+  id int [pk, ref: > lexical_unit.id]
+  form text
+  lemma_id int [ref: > lemma.id]
+}
+
+Table verb_form {
+  form_id int [pk, ref: > form.id]
+  person_id int [ref: > person.person_id]
+  number_id int [ref: > number.number_id]
+  tense_id int [ref: > tense.tense_id]
+  mood_id int [ref: > mood.mood_id]
+  aspect_id int [ref: > aspect.aspect_id]
+  has_aux boolean
+}
+
+Table person {
+  person_id int [pk]
+  value text
+}
+
+Table number {
+  number_id int [pk]
+  value text
+}
+
+Table tense {
+  tense_id int [pk]
+  value text
+}
+
+Table mood {
+  mood_id int [pk]
+  value text
+}
+
+Table aspect {
+  aspect_id int [pk]
+  value text
+}
+
