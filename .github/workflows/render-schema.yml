@@ -1,0 +1,45 @@
+name: Render Schema
+
+on:
+  push:
+    paths:
+      - "schema/**/*.dbml"
+  workflow_dispatch:
+
+jobs:
+  render:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Render DB diagram
+        run: |
+          mkdir -p docs/schema
+          npx --yes @softwaretechnik/dbml-renderer \
+            -i schema/gillexdb.dbml \
+            -o docs/schema/db_diagram.svg
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git add docs/schema/db_diagram.svg
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.diff.outputs.changed == 'true'
+        with:
+          commit_message: "chore(schema): update db diagram"
+          file_pattern: docs/schema/db_diagram.svg
