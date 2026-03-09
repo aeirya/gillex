@@ -1,0 +1,2 @@
+form_id,person_id,number_id,tense_id,mood_id,aspect_id,has_aux
+1,1,sg,pastdef,ind,defl,true
