@@ -1,2 +1,10 @@
 verb_tense_id, full name
-pastdef
+1, pastdef
+2, presentfuture
+3, presentdef
+4, futurecategoric
+5, pastneutral
+6, pastcontinuous
+7, pluperfect
+8, presentFutureaortist
+9, subjunctivepast 
