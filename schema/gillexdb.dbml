@@ -7,13 +7,18 @@ Table lexical_unit {
 
 Table lemma {
   id int [pk]
-  lemma text
+  lemma text [unique]
 }
 
 Table dict_entry {
     id int [pk, ref: > lexical_unit.id]
     lemma_id int [ref: > lemma.id]
-    pos text
+    pos_id int [ref: > pos.id]
+}
+
+Table pos {
+    id int [pk]
+    name text
 }
 
 Table verb_lemma {
@@ -23,21 +28,21 @@ Table verb_lemma {
     is_transitive boolean
 }
 
-Table verb_transitive_intransitive {
-    id int [pk, ref: > verb_lemma.id]
-    transitive_lemma text
-    intransitive_lemma text
+Table verb_transitivity_alternation {
+    transitive_id int [ref: > verb_lemma.id]
+    intransitive_id int [ref: > verb_lemma.id]
 }
 
 Table dialect {
+  id int [pk]
+  name text
   western boolean
   eastern boolean
-  dialect_code int
 }
 
 Table lexical_unit_dialect {
   lexical_unit_id int [ref: > lexical_unit.id]
-  dialect_code int [ref: > dialect.dialect_code]
+  diaect_id int [ref: > dialect.id]
 }
 
 Table morpheme {
@@ -81,6 +86,10 @@ Table verb_form {
   mood_id int [ref: > mood.mood_id]
   aspect_id int [ref: > aspect.aspect_id]
   has_aux boolean
+
+  indexes {
+    (person_id, number_id, tense_id, mood_id, aspect_id)
+  }
 }
 
 Table person {
@@ -108,3 +117,25 @@ Table aspect {
   value text
 }
 
+Table gloss {
+  id int [pk]
+  lexical_unit_id int
+  language_id int [ref : > language.id]
+  gloss text
+}
+
+Table language {
+  id int [pk]
+  name text
+}
+
+// continuation class
+Table continuation_class {
+  id int [pk]
+  name text
+}
+
+Table lemma_continuation {
+  lemma_id int
+  continuation_id int
+}
