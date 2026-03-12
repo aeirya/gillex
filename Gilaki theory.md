@@ -24,25 +24,23 @@ More concretely, (**author's**) standardisation attempts a one-to-one mapping be
 |           | Front                    | Central    | Back                     |
 | --------- | ------------------------ | ---------- | ------------------------ |
 | Close     | /i/ - \<i> ; /i:/ - <ı̄> |            | /u/ - \<u> ; /u:/ - <ū> |
-| Close-mid | /e/ - \<e>; /e:/ - \<e>  |            | /o/ - \<o> ; /o:/ - \<o> |
-| Open-mid  |                          | /ə/ - \<ə> |                          |
-| Open      | /a/ - \<a>               |            | /ɑ/ - \<å>               |
+| Close-mid |                          |            | /o/ - \<o> ; /o:/ - \<o> |
+| Open-mid  | /ɛ/ - \<e>; /ɛ:/ - \<e>  | /ə/ - \<ə> |                          |
+| Open      | /æ/ - \<a>               |            | /ɑ/ - \<å>               |
 
 It should be noted, however, that both of the grammars we consulted (**Citas**) imply that the phonological value of the long vowels is rather archaic and (mostly) out of use.
 
-|                   | Bilabial                | Labiodental             | Alveolar                    | Postalveolar            | Velar                   | Uvular                    | Pharyngeal |
-| ----------------- | ----------------------- | ----------------------- | --------------------------- | ----------------------- | ----------------------- | ------------------------- | ---------- |
-| Plosive           | /p/ - \<p> ; /b/ - \<b> |                         | /t/ - \<t> ; /t/ - \<t>     |                         | /k/ - \<k> ; /g/ - \<g> |                           |            |
-| Nasal             | /m/ - \<m>              |                         | /n/ - \<n>                  |                         |                         |                           |            |
-| Tap or Flap       |                         |                         | /ɾ/ - \<r>                  |                         |                         |                           |            |
-| Fricative         |                         | /f/ - \<f> ; /v/ - \<v> | /s/ - \<s> ; /z/ - \<z>     | /ʃ/ - \<š> ; /ʒ/ - \<ž> |                         |                           |            |
-| Affricates        |                         |                         | /t͡ʃ/ - \<č> ; /d͡ʒ/ - \<ǰ> |                         |                         | /$\chi$/ -\<x> ; /ʁ/ \<ɣ> | /h/ - \<h> |
-| Lateral fricative |                         |                         | /l/ - \<l>                  |                         |                         |                           |            |
-| Approximant       |                         |                         |                             |                         |                         |                           |            |
+|                   | Bilabial                | Labiodental             | Alveolar                    | Postalveolar            | Velar                   | Uvular                      | Pharyngeal |
+| ----------------- | ----------------------- | ----------------------- | --------------------------- | ----------------------- | ----------------------- | --------------------------- | ---------- |
+| Plosive           | /p/ - \<p> ; /b/ - \<b> |                         | /t/ - \<t> ; /t/ - \<t>     |                         | /k/ - \<k> ; /g/ - \<g> |                             |            |
+| Nasal             | /m/ - \<m>              |                         | /n/ - \<n>                  |                         |                         |                             |            |
+| Tap or Flap       |                         |                         | /ɾ/ - \<r>                  |                         |                         |                             |            |
+| Fricative         |                         | /f/ - \<f> ; /v/ - \<v> | /s/ - \<s> ; /z/ - \<z>     | /ʃ/ - \<š> ; /ʒ/ - \<ž> |                         |                             |            |
+| Affricates        |                         |                         | /t͡ʃ/ - \<č> ; /d͡ʒ/ - \<ǰ> |                         |                         | /$\chi$/ -\<x> ; /ʁ/ - \<ɣ> | /h/ - \<h> |
+| Lateral fricative |                         |                         | /l/ - \<l>                  |                         |                         |                             |            |
+| Approximant       |                         |                         | /j/ - \<y>                  |                         |                         |                             |            |
 
 *NOTE*: We are aware that the \<x> and \<ɣ> symbols are usually used to represent velar sounds, however, (**CITA**, p.15) labels them explicitly as uvular and uses them as such in their writing standardisation, which we have decided to adopt for the reasons mentioned above. 
-
-**What exactly is \<y>? Maybe /j/? Consult this with Aeirya**
 
 ### Key verbal morphology
 
@@ -85,8 +83,6 @@ Regular singulars, however, show a degree of consistent variation:
 *The tenses not mentioned in the table are formed using auxiliar verbs.*
 
 Negation can be achieved using one of the following prefixes: `na-` / `ni-` / `nu-`. The morpheme carrying the negation itself seems to be the `/n/` while the vowel appears to be defined purely by phonosyntax. 
-
-**THERE IS ABSOLUTELY NO WAY I CAN FIT THE MORPHOLOGICAL RULES FOR EVERY SINGLE TENSE INTO THE REPORT PAGE LIMIT**
 ## The database design
 
 The database contains the following tables:
