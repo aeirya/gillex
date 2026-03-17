@@ -1,0 +1,12 @@
+verb_tense_id, shortname, name
+prs, presentfuture, The Present-Future Tense
+prs.def, presentdef, The Present Definite Tense
+fut.cat, futurecategoric, The Future Categoric Tense
+pst, pastneutral, The Past Neutral Tense
+pst.con, pastcontinuous, The Past Continuous Tense
+pst.def, pastdefinite, The Present Definite Tense
+pst.ppf, pluperfect, The Pluperfect Tense
+
+prs.subj, presentfutureaortist, The Present-Future Tense (Aorist)
+pst.subj, subjunctivepast, The Subjunctive Past Tense
+inf, infinitive, Infinitive
