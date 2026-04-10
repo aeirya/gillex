@@ -14,7 +14,7 @@ Table lemma {
 
 // done
 Table dict_entry {
-    id int
+    id int [pk]
     lemma_id int [ref: > lemma.id]
     pos text
 }
@@ -49,7 +49,7 @@ Table lexical_unit_dialects {
 
 
 Table morpheme {
-  id int [ref: > lexical_unit.id]
+  id int [pk]
   is_prefix boolean
   is_suffix boolean
 }
