@@ -1,4 +1,4 @@
-id, lemma_id, form
+id, dict_entry_id, form
 1, 1, kudən dərə bum
 2, 1, kudən dərə bi
 3, 1, bukudəm
@@ -83,9 +83,9 @@ id, lemma_id, form
 82, 1, bukudə bim
 83, 1, bukudə bid
 84, 1, bukudə bid
-85, 6, hadan
-86, 7, fadǝn
-87, 4, bubon
-88, 5, buon
-89, 10, bobon
-90, 11, use kudǝn
+85, 2, hadan
+86, 2, fadǝn
+87, 3, bubon
+88, 3, buon
+89, 3, bobon
+90, 4, use kudǝn
