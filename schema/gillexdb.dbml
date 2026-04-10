@@ -68,7 +68,7 @@ Table suffix_morpheme {
 
 Table mwlu {
     id int [pk, ref: > lexical_unit.id]
-    continuation_class text
+    class text
 }
 
 // done
@@ -101,25 +101,25 @@ Table person {
 
 // done
 Table number {
-  number_id int [pk]
+  number_id text [pk]
   value text
 }
 
 // done
 Table tense {
-  tense_id int [pk]
+  tense_id text [pk]
   value text
 }
 
 // done
 Table mood {
-  mood_id int [pk]
+  mood_id text [pk]
   value text
 }
 
 // done
 Table aspect {
-  aspect_id int [pk]
+  aspect_id text [pk]
   value text
 }
 
@@ -127,17 +127,17 @@ Table aspect {
 Table gloss {
   id int [pk]
   lexical_unit_id int [ref: > lexical_unit.id]
-  language_id int [ref : > gloss_language.id]
+  language_id text
   gloss text
 }
 
-// continuation class
-Table continuation_class {
-  id int [pk]
-  name text
-}
+// // continuation class
+// Table continuation_class {
+//   id int [pk]
+//   name text
+// }
 
-Table lemma_continuation {
-  lemma_id int
-  continuation_id int
-}
+// Table lemma_continuation {
+//   lemma_id int
+//   continuation_id int
+// }
