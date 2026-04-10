@@ -1,0 +1,110 @@
+form_id, form, person_id,number_id,tense_id,mood_id,aspect_id,has_aux
+1,1,sg,pastdef,ind,defl,true
+
+# simple past
+3, bukudəm, 1, sg, pst, IND, PFV, 0
+4, bukudi, 2, sg, pst, IND, PFV, 0
+5, bukudǝ, 3, sg, pst, IND, PFV, 0
+6, bukudim, 1, pl, pst, IND, PFV, 0
+7, bukudid, 2, pl, pst, IND, PFV, 0
+8, bukudid, 3, pl, pst, IND, PFV, 0
+
+# neg past
+9, nukudəm, 1, sg, pst, IND, PFV, 0
+10, nukudi, 2, sg, pst, IND, PFV, 0
+11, nukudǝ, 3, sg, pst, IND, PFV, 0
+12, nukudim, 1, pl, pst, IND, PFV, 0
+13, nukudid, 2, pl, pst, IND, PFV, 0
+14, nukudid, 3, pl, pst, IND, PFV, 0
+
+# simple present
+15, kunəm, 1, sg, prs, IND, IPFV, 0
+16, kunəmǝ, 1, sg, prs, IND, IPFV, 0
+17, kuni, 2, sg, prs, IND, IPFV, 0
+18, kune, 3, sg, prs, IND, IPFV, 0
+19, kunim, 1, pl, prs, IND, IPFV, 0
+20, kunimi, 1, pl, prs, IND, IPFV, 0
+21, kunid, 2, pl, prs, IND, IPFV, 0
+22, kunid, 3, pl, prs, IND, IPFV, 0
+
+# neg simple present
+23, nǝkunəm, 1, sg, prs, IND, IPFV, 0
+24, nǝkunəmǝ, 1, sg, prs, IND, IPFV, 0
+25, nǝkuni, 2, sg, prs, IND, IPFV, 0
+26, nǝkune, 3, sg, prs, IND, IPFV, 0
+27, nǝkunim, 1, pl, prs, IND, IPFV, 0
+28, nǝkunimi, 1, pl, prs, IND, IPFV, 0
+29, nǝkunid, 2, pl, prs, IND, IPFV, 0
+30, nǝkunid, 3, pl, prs, IND, IPFV, 0
+
+# past continuous
+31, kudim, 1, sg, pst.con, IND, IPFV, 0
+32, kudi, 2, sg, pst.con, IND, IPFV, 0
+33, kudi, 3, sg, pst.con, IND, IPFV, 0
+34, kudim, 1, pl, pst.con, IND, IPFV, 0
+35, kudid, 2, pl, pst.con, IND, IPFV, 0
+36, kudid, 3, pl, pst.con, IND, IPFV, 0
+
+# present definite
+37, kudən dǝrəm, 1, sg, prs.def, IND, IPFV, 1
+38, kudən dǝri, 2, sg, prs.def, IND, IPFV, 1
+39, kudən dǝrǝ, 3, sg, prs.def, IND, IPFV, 1
+40, kudən dǝrim, 1, pl, prs.def, IND, IPFV, 1
+41, kudən dǝrimi, 1, pl, prs.def, IND, IPFV, 1
+42, kudən dǝrid, 2, pl, prs.def, IND, IPFV, 1
+43, kudən dǝridi, 2, pl, prs.def, IND, IPFV, 1
+44, kudən dǝridi, 3, pl, prs.def, IND, IPFV, 1
+
+# present-future subjunctive (aorist)
+45, xayəm kudən, 1, sg, fut.cat, IND, IPFV, 1
+46, xayi kudən, 2, sg, fut.cat, IND, IPFV, 1
+47, xaye kudən, 3, sg, fut.cat, IND, IPFV, 1
+48, xayimi kudən, 1, pl, fut.cat, IND, IPFV, 1
+49, xayid kudən, 2, pl, fut.cat, IND, IPFV, 1
+50, xayid kudən, 3, pl, fut.cat, IND, IPFV, 1
+
+# past definite
+51, kudən dubum, 1, sg, pst.def, IND, IPFV, 1
+52, kudən dibi, 2, sg, pst.def, IND, IPFV, 1
+53, kudən dubu, 3, sg, pst.def, IND, IPFV, 1
+54, kudən dibim, 1, pl, pst.def, IND, IPFV, 1
+55, kudən dubid, 2, pl, pst.def, IND, IPFV, 1
+56, kudən dubid, 3, pl, pst.def, IND, IPFV, 1
+
+# defective
+57, kudən dǝrǝ bum, 1, sg, pst.def, IND, IPFV, 1
+58, kudən dǝrǝ bi, 2, sg, pst.def, IND, IPFV, 1
+59, kudən dǝrǝ bu, 3, sg, pst.def, IND, IPFV, 1
+60, kudən dǝrǝ bim, 1, pl, pst.def, IND, IPFV, 1
+61, kudən dǝrǝ bid, 2, pl, pst.def, IND, IPFV, 1
+62, kudən dǝrǝ bid, 3, pl, pst.def, IND, IPFV, 1
+
+# pluperfect
+63, bukudə bum, 1, sg, pst.ppf, IND, PFV, 1
+64, bukudə bi, 2, sg, pst.ppf, IND, PFV, 1
+65, bukudə bu, 3, sg, pst.ppf, IND, PFV, 1
+66, bukudə bim, 1, pl, pst.ppf, IND, PFV, 1
+67, bukudə bid, 2, pl, pst.ppf, IND, PFV, 1
+68, bukudə bid, 3, pl, pst.ppf, IND, PFV, 1
+
+# assimilation in rapid speech
+69, bukudi bi, 2, sg, pst.ppf, IND, PFV, 1
+70, bukudu bu, 3, sg, pst.ppf, IND, PFV, 1
+
+# aorist
+71, bukunəm, 1, sg, prs, SBJV, PFV, 0
+72, bukunəmǝ, 1, sg, prs, SBJV, PFV, 0
+73, bukuni, 2, sg, prs, SBJV, PFV, 0
+74, bukune, 3, sg, prs, SBJV, PFV, 0
+75, bukunim, 1, pl, prs, SBJV, PFV, 0
+76, bukunimi, 1, pl, prs, SBJV, PFV, 0
+77, bukunid, 2, pl, prs, SBJV, PFV, 0
+78, bukunid, 3, pl, prs, SBJV, PFV, 0
+
+# past subjunctive
+79, bukudə bim, 1, sg, pst, SBJV, PFV, 1
+80, bukudə bi, 2, sg, pst, SBJV, PFV, 1
+81, bukudə bi, 3, sg, pst, SBJV, PFV, 1
+82, bukudə bim, 1, pl, pst, SBJV, PFV, 1
+83, bukudə bid, 2, pl, pst, SBJV, PFV, 1
+84, bukudə bid, 3, pl, pst, SBJV, PFV, 1

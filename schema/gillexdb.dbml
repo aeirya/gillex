@@ -1,3 +1,4 @@
+// done
 Table lexical_unit {
     id int [pk]
     is_dict_entry boolean
@@ -5,22 +6,20 @@ Table lexical_unit {
     is_mwlu boolean
 }
 
+// done (4)
 Table lemma {
   id int [pk]
   lemma text [unique]
 }
 
+// done
 Table dict_entry {
     id int [pk, ref: > lexical_unit.id]
     lemma_id int [ref: > lemma.id]
-    pos_id int [ref: > pos.id]
+    pos text
 }
 
-Table pos {
-    id int [pk]
-    name text
-}
-
+// done
 Table verb_lemma {
     id int [pk, ref: > dict_entry.id]
     present_root text
@@ -28,11 +27,13 @@ Table verb_lemma {
     is_transitive boolean
 }
 
+// left empty
 Table verb_transitivity_alternation {
     transitive_id int [ref: > verb_lemma.id]
     intransitive_id int [ref: > verb_lemma.id]
 }
 
+// done
 Table dialect {
   id int [pk]
   name text
@@ -40,44 +41,44 @@ Table dialect {
   eastern boolean
 }
 
-Table lexical_unit_dialect {
+// done
+Table lexical_unit_dialects {
   lexical_unit_id int [ref: > lexical_unit.id]
-  diaect_id int [ref: > dialect.id]
+  dialect_id int [ref: > dialect.id]
 }
+
 
 Table morpheme {
   id int [ref: > lexical_unit.id]
-  is_independent boolean
-}
-
-Table independent_morpheme {
-  id int [ref: > morpheme.id]
   is_prefix boolean
   is_suffix boolean
 }
 
 Table prefix_morpheme {
-  id int [ref: > independent_morpheme.id]
+  id int [ref: > morpheme.id]
   is_derivational boolean
 }
 
+// done
 Table suffix_morpheme {
-  id int [ref: > independent_morpheme.id]
+  id int [ref: > morpheme.id]
   is_person_number boolean
   is_object boolean
 }
 
 Table mwlu {
     id int [pk, ref: > lexical_unit.id]
-    continuation_class text
+    class text
 }
 
+// done
 Table form {
   id int [pk, ref: > lexical_unit.id]
   form text
   lemma_id int [ref: > lemma.id]
 }
 
+// done
 Table verb_form {
   form_id int [pk, ref: > form.id]
   person_id int [ref: > person.person_id]
@@ -92,50 +93,51 @@ Table verb_form {
   }
 }
 
+// done
 Table person {
   person_id int [pk]
   value text
 }
 
+// done
 Table number {
-  number_id int [pk]
+  number_id text [pk]
   value text
 }
 
+// done
 Table tense {
-  tense_id int [pk]
+  tense_id text [pk]
   value text
 }
 
+// done
 Table mood {
-  mood_id int [pk]
+  mood_id text [pk]
   value text
 }
 
+// done
 Table aspect {
-  aspect_id int [pk]
+  aspect_id text [pk]
   value text
 }
 
+// done 
 Table gloss {
   id int [pk]
-  lexical_unit_id int
-  language_id int [ref : > language.id]
+  lexical_unit_id int [ref: > lexical_unit.id]
+  language_id text
   gloss text
 }
 
-Table language {
-  id int [pk]
-  name text
-}
+// // continuation class
+// Table continuation_class {
+//   id int [pk]
+//   name text
+// }
 
-// continuation class
-Table continuation_class {
-  id int [pk]
-  name text
-}
-
-Table lemma_continuation {
-  lemma_id int
-  continuation_id int
-}
+// Table lemma_continuation {
+//   lemma_id int
+//   continuation_id int
+// }
