@@ -1,7 +1,7 @@
 // done
 Table lexical_unit {
     id int [pk]
-    is_dict_entry boolean
+    is_inflected boolean
     is_dialect boolean
     is_mwlu boolean
 }
@@ -14,7 +14,7 @@ Table lemma {
 
 // done
 Table dict_entry {
-    id int [pk, ref: > lexical_unit.id]
+    id int
     lemma_id int [ref: > lemma.id]
     pos text
 }
@@ -75,17 +75,17 @@ Table mwlu {
 Table form {
   id int [pk, ref: > lexical_unit.id]
   form text
-  lemma_id int [ref: > lemma.id]
+  dict_entry int [ref: > dict_entry.id]
 }
 
 // done
 Table verb_form {
   form_id int [pk, ref: > form.id]
-  person_id int [ref: > person.person_id]
-  number_id int [ref: > number.number_id]
-  tense_id int [ref: > tense.tense_id]
-  mood_id int [ref: > mood.mood_id]
-  aspect_id int [ref: > aspect.aspect_id]
+  person_id text [ref: > person.person_id]
+  number_id text [ref: > number.number_id]
+  tense_id text [ref: > tense.tense_id]
+  mood_id text [ref: > mood.mood_id]
+  aspect_id text [ref: > aspect.aspect_id]
   has_aux boolean
 
   indexes {
