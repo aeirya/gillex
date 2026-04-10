@@ -8,3 +8,4 @@ id, is_lemma, is_dialect, is_mwlu
 7, 1, 1, 0
 8, 1, 1, 0
 9, 1, 1, 0
+10, 0, 0, 1

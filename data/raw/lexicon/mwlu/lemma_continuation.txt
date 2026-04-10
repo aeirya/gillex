@@ -1,3 +1,6 @@
+NOUN
+    _   nouns: e.g. use
+
 V_DER_PRF
     STEM
     NEG_AFX
@@ -35,3 +38,7 @@ PRS_PER_NO
 CON_OBJ
     _       connected objects
     nil     ǝš, ...  
+
+KUDAN
+    _       NOUN + to do
+    
