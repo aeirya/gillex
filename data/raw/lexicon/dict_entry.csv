@@ -1,4 +1,5 @@
 id, lemma_id, pos
 1, 1, VERB
-85, 2, INF
-86, 2, INF
+2, 2, INF
+3, 4, INF
+4, 11, INF
