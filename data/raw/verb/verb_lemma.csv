@@ -1,5 +1,5 @@
-id, present_root, past_root, is_transitive
-1, kun, kud, 0
+lemma_id, present_root, past_root, is_transitive
+1, kun, kud, 0, 
 2, de, da, 1
 3, šu, šo, 0
 4, bu, bo, 0

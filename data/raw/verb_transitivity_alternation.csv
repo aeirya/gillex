@@ -1,1 +1,6 @@
-id, present_root, past_root, is_transitive
+transitive_lemma_id,  intransitive_lemma_id
+13, 12
+15, 14
+17, 16
+19, 18
+21, 20
