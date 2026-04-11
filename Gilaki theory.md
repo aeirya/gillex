@@ -2,13 +2,13 @@
 
 ## Background
 
-Gilaki is an Indo-European language used by the Gilak ethical minority local to northern Iran's Gilan area. There are around 3 million Gilaks (Ivanov & Dodykhudoeva, 2015) and the vast majority of them are bilingual speakers of Persian, which has long acted as a superstrate language. 
+Gilaki is an Indo-European language used by the Gilak ethical minority local to northern Iran's Gilan area. There are around 3 million Gilaks (Ivanov & Dodykhudoeva, 2015) and the vast majority of them are bilingual speakers of Persian, which has long acted as a superstratum language. 
 
 As Persian is the official language both in the area and the wider region, this has unsurprisingly lead to a situation of diglosia, as defined by Ferguson (1959). The sociolinguistic situation is such that the very speakers of Gilaki often consider Persian a superior language, even claiming that Gilaki doesn't really exist, which, as Ferguson puts it: 
 
 > cannot be called a deliberate attempt to deceive the questioner, but seems almost a self-deception.
 
-From the linguistic perspective, however, Gilaki behaves like a textbook substrate language. While the Persian influence is obviously not negligible, it has it's own defined and separate grammar system.
+From the linguistic perspective, however, Gilaki behaves like a textbook *low* language. While the Persian influence is obviously not negligible, it has it's own defined and separate grammar system.
 
 In this database, we aim to document the verb system of Gilaki, using a system heavily inspired by the Basque EDBL (Aduriz et al. 1998, Aldezabal et al. 2001). In the following sections, we will explain the linguistic paradigms that govern the language usage, their impact on the database design and the final architecture.
 
@@ -17,9 +17,9 @@ In this database, we aim to document the verb system of Gilaki, using a system h
 
 One of the main complications for Natural Language Processing in Gilaki is the fact that the language has no unified writing system. There have been several attempts at establishing a standardised writing system, however, none has become widespread enough to be considered standard (Rastorgueva et al. 2012). As a result of this, the current situation is that there are multiple competing systems, which seem to be subject to linguistic variation patterns that traditionally govern the behaviour of spoken varieties, such as sociological indexing, as defined by Eckert (2019). Therefore, different strata tend to write the same language in different ways. 
 
-In this database, we will be using the writing standardisation used in the book The Gilaki Language (Rastorgueva et al. 2012) for consistency reasons and because this system leverages the phonological level which unlike the writing shows a degree of stability. This will also allow downstream users to use a G2P system to 'translate' the database into any writing standardisation they need to operate within. 
+In this database, we will be using the writing standardisation used in the book The Gilaki Language (Rastorgueva et al. 2012) for consistency reasons and because this system attempts a direct grapheme to phoneme correspondence, which is key as the phonological level, unlike the writing, shows a degree of stability. This will also allow downstream users to use a G2P system to 'translate' the database into any writing standardisation they need to operate within. 
 
-More concretely the author's standardisation attempts a one-to-one mapping between phonemes and graphemes. As it stands, the system translates to the IPA as follows:
+As it stands, the system translates to the IPA as follows:
 
 |           | Front                    | Central    | Back                     |
 | --------- | ------------------------ | ---------- | ------------------------ |
@@ -28,11 +28,11 @@ More concretely the author's standardisation attempts a one-to-one mapping betwe
 | Open-mid  | /ɛ/ - \<e>; /ɛ:/ - \<e>  | /ə/ - \<ə> |                          |
 | Open      | /æ/ - \<a>               |            | /ɑ/ - \<å>               |
 
-It should be noted, however, that both of the grammars we consulted (Rastorgueva et al. 2012, Purhadi 2018) imply that the phonological value of the long vowels is rather archaic and (mostly) out of use.
+It should be noted that both of the grammars we consulted (Rastorgueva et al. 2012, Purhadi 2018) imply that the phonological value of the long vowels is rather archaic and (mostly) out of use.
 
 |                   | Bilabial                | Labiodental             | Alveolar                    | Postalveolar            | Velar                   | Uvular                      | Pharyngeal |
 | ----------------- | ----------------------- | ----------------------- | --------------------------- | ----------------------- | ----------------------- | --------------------------- | ---------- |
-| Plosive           | /p/ - \<p> ; /b/ - \<b> |                         | /t/ - \<t> ; /t/ - \<t>     |                         | /k/ - \<k> ; /g/ - \<g> |                             |            |
+| Plosive           | /p/ - \<p> ; /b/ - \<b> |                         | /t/ - \<t> ; /d/ - \<d>     |                         | /k/ - \<k> ; /g/ - \<g> |                             |            |
 | Nasal             | /m/ - \<m>              |                         | /n/ - \<n>                  |                         |                         |                             |            |
 | Tap or Flap       |                         |                         | /ɾ/ - \<r>                  |                         |                         |                             |            |
 | Fricative         |                         | /f/ - \<f> ; /v/ - \<v> | /s/ - \<s> ; /z/ - \<z>     | /ʃ/ - \<š> ; /ʒ/ - \<ž> |                         |                             |            |
@@ -40,12 +40,11 @@ It should be noted, however, that both of the grammars we consulted (Rastorgueva
 | Lateral fricative |                         |                         | /l/ - \<l>                  |                         |                         |                             |            |
 | Approximant       |                         |                         | /j/ - \<y>                  |                         |                         |                             |            |
 
-*NOTE*: We are aware that the \<x> and \<ɣ> symbols are usually used to represent velar sounds, however, Rastorgueva et al. (2012, p.15) label them explicitly as uvular and uses them as such in their writing standardisation, which we have decided to adopt for the reasons mentioned above. 
+*NOTE*: We are aware that the \<x> and \<ɣ> symbols are usually used to represent velar sounds, however, Rastorgueva et al. (2012, p.15) label them explicitly as uvular and use them as such in their writing standardisation, which we have decided to adopt for the reasons mentioned above. 
 
 ### Key verbal morphology
 
-
-As is frequently the case with minority languages, especially in mountainous regions, the morphology of Gilaki has a decent number of irregularities, the theoretical explanation of which is, unfortunately, beyond the scope of this report. We would like to direct the interested readers to, Rastorgueva et al. (2012), as it makes an detailed explanation of most of these.
+As is frequently the case with minority languages, especially in mountainous regions, the morphology of Gilaki has a decent number of irregularities the theoretical explanation of which is, unfortunately, beyond the scope of this report. We would like to direct the interested readers to, Rastorgueva et al. (2012), as it makes an detailed explanation of most of these.
 
 Some regular and consistent patterns, nevertheless, do merit further explanation:
 
@@ -86,7 +85,122 @@ Regular singulars, however, show a degree of consistent variation:
 Negation can be achieved using one of the following prefixes: `na-` / `ni-` / `nu-`. The morpheme carrying the negation itself seems to be the `/n/` while the vowel appears to be defined purely by phonosyntax. 
 ## The database design
 
-The database contains the following tables:
+The database contains the following tables and variables:
+
+### Morpheme section
+#### `morpheme`
+
+- **id** - The number identifier of the morpheme, used as a PK and FK to connect to the tables `prefix_morpheme` and `suffix_morpheme`.
+- **morpheme** - The actual morpheme form
+- **is_prefix** - Boolean. Is the morpheme a prefix?
+- **is_suffix** - Boolean. Is the morpheme a suffix?
+
+#### `prefix_morpheme`
+
+- **id** - The number identifier of the morpheme, used as FK. 
+- **is_derivational** - Boolean. Is the prefix derivational? 
+
+#### `suffix_morpheme`
+
+- **id** - The number identifier of the morpheme, used as FK. 
+- **is_person_number** - Boolean. Does the suffix impose a person/number information?
+- **is_object** - Boolean. Does the suffix work as an object on the syntactic level? 
+
+### Lexical units section
+
+#### `form`
+
+- **id** - The number identifier of the form, used as PK and FK to connect to the tables `verb_form` and `lexical_unit`.
+- **dict_entry_id** - The number identifier of the corresponding dictionary entry, used as FK to connect to the table `dict_entry`.
+- **form** - The actual form.
+
+#### `lexical_unit`
+
+- **id** - The number identifier of the lexical unit, used as FK to connect to the tables `form`, `gloss`, `mwlu`, `lexical_unit_dialects`.
+- **is_inflected** - Boolean. Is the form inflected?
+- **is_dialect** - Boolean. Is the form dialectal?
+- **is_mwlu** - Boolean. Is the form a multi-word lexical unit? 
+
+#### `dict_entry`
+
+- **id** - The number identifier of the dictionary entry, used as FK to connect to the tables `form` and `verb_lemma`.
+- **lemma_id** - The number identifier of the corresponding lemma, used as FK to connect to the `lemma` table. 
+- **pos** - The corresponding Part of Speech tag. 
+
+#### `lemma`
+
+- **id** - The number identifier of the lemma, used as PK and FK to connect to the table `dict_entry`.
+- **lemma** - The actual lemma. 
+
+#### `mwlu`
+
+- **id** - The number identifier of the multi word lexical unit, used as FK to connect to the `lexical_unit` table. 
+- **class** - The mwlu type. 
+
+#### `gloss`
+
+- **id** - The number identifier of the glossary entry, used as PK. 
+- **lexical_unit_id** - The number identifier of the lexical unit, used as FK to connect to the `lexical_unit` table. 
+- **language_id** - The identifier tag of the target language.
+- **gloss** - The translation of the lexical unit to the target language. 
+
+#### `lexical_unit_dialect`
+
+- **lexical_unit_id** - The number identifier of the lexical unit, used as FK to connect to the `lexical_unit` table. 
+- **dialect_id** - Identification code of the corresponding dialect, used as FK to connect to the `dialect` table.
+
+#### `dialect`
+
+- **id** - Identification code of the corresponding dialect, used as PK and FK to connect to the `lexical_unit_dialect`.
+- **name** - The name of the dialect.
+- **western** - Boolean. Is it a western dialect?
+- **eastern** - Boolean. Is it a eastern dialect?
+
+#### `verb_form`
+
+- **form_id** - The number identifier of the verb form, used as PK and FK to connect to the `form` table.
+- **form** - The actual verb form.
+- **person_id** - The code identifier of the person, used as FK to connect to the `person` table. 
+- **number_id** - The code identifier of the number, used as FK to connect to the `number` table.
+- **tense_id** - The code identifier of the tense, used as FK to connect to the `tense` table.
+- **mood_id** - The code identifier of the mood, used as FK to connect to the `mood` table.
+- **aspect_id** - The code identifier of the aspect, used as FK to connect to the `aspect` table.
+- **has_aux** - Boolean. Does the verb form have an auxiliary?
+
+#### `person`
+
+- **person_id** - The code identifier of the person, used as PK and FK to connect to the `verb_form` table.
+- **value** - The actual person value.
+
+#### `number`
+
+- **number_id** - The code identifier of the number, used as PK and FK to connect to the `verb_form` table.
+- **value** - The actual number value.
+
+
+#### `tense`
+
+- **tense_id** - The code identifier of the tense, used as PK and FK to connect to the `verb_form` table.
+- **value** - The actual tense value.
+
+#### `mood`
+
+- **mood_id** - The code identifier of the mood, used as PK and FK to connect to the `verb_form` table.
+- **value** - The actual mood value.
+
+#### `aspect`
+
+- **aspect_id** - The code identifier of the aspect, used as PK and FK to connect to the `verb_form` table.
+- **value** - The actual aspect value.
+
+#### `verb_lemma`
+
+- **id** - The number identifier of the verbal lemma, used as PK and FK to connect to the `dict_entry` table.
+- **present_root** - The present root of the verb.
+- **past_root** - The past root of the verb.
+- **is_transitive** - Boolean. Is the verb transitive?
+
+
 
 ---
 # Project scope disclaimer
@@ -115,3 +229,22 @@ Eckert, P. (2019). The limits of meaning: Social indexicality, variation, and th
 Rastorgueva, V. S., Kerimova, A. A., Mamedzade, A. K., Pireiko, L. A., Edel’man, D. I., & Lockwood, R. M. (2012). _The Gilaki language_. Retrieved from [https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-182789](https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-182789)
 
 Purhadi, M. (2018). _Zabān-e Gilaki_ [The Gilaki language]. Nashr-e Farhang-e Ilia.
+
+# Tables for the presentation
+
+|           | Front      | Central | Back       |
+| --------- | ---------- | ------- | ---------- |
+| Close     | /i/ ; /i:/ |         | /u/ ; /u:/ |
+| Close-mid |            |         | /o/ ; /o:/ |
+| Open-mid  | /ɛ/ ; /ɛ:/ | /ə/     |            |
+| Open      | /æ/        |         | /ɑ/        |
+
+|                   | Bilabial  | Labiodental | Alveolar      | Postalveolar | Velar     | Uvular         | Pharyngeal |
+| ----------------- | --------- | ----------- | ------------- | ------------ | --------- | -------------- | ---------- |
+| Plosive           | /p/ ; /b/ |             | /t/ ; /d/     |              | /k/ ; /g/ |                |            |
+| Nasal             | /m/       |             | /n/           |              |           |                |            |
+| Tap or Flap       |           |             | /ɾ/           |              |           |                |            |
+| Fricative         |           | /f/ ; /v/   | /s/ ; /z/     | /ʃ/ ; /ʒ/    |           |                |            |
+| Affricates        |           |             | /t͡ʃ/ ; /d͡ʒ/ |              |           | /$\chi$/ ; /ʁ/ | /h/        |
+| Lateral fricative |           |             | /l/           |              |           |                |            |
+| Approximant       |           |             | /j/           |              |           |                |            |
