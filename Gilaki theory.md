@@ -91,7 +91,7 @@ The database contains the following tables and variables:
 #### `morpheme`
 
 - **id** - The number identifier of the morpheme, used as a PK and FK to connect to the tables `prefix_morpheme` and `suffix_morpheme`.
-- **morpheme** - The actual morpheme form
+- **morpheme** - The actual morpheme form. (Such as: *əm*)
 - **is_prefix** - Boolean. Is the morpheme a prefix?
 - **is_suffix** - Boolean. Is the morpheme a suffix?
 
@@ -112,7 +112,7 @@ The database contains the following tables and variables:
 
 - **id** - The number identifier of the form, used as PK and FK to connect to the tables `verb_form` and `lexical_unit`.
 - **dict_entry_id** - The number identifier of the corresponding dictionary entry, used as FK to connect to the table `dict_entry`.
-- **form** - The actual form.
+- **form** - The actual form. (Such as: *bukudəm*)
 
 #### `lexical_unit`
 
@@ -129,8 +129,13 @@ The database contains the following tables and variables:
 
 #### `lemma`
 
-- **id** - The number identifier of the lemma, used as PK and FK to connect to the table `dict_entry`.
-- **lemma** - The actual lemma. 
+- **id** - The number identifier of the lemma, used as PK and FK to connect to the tables `dict_entry` and `verb_lemma`.
+- **lemma** - The actual lemma. (Such as: *kudǝn*)
+
+#### `verb_transitivity_alternation`
+
+- **transitive_lemma_id** - The number identifier of the transitive equivalent of a lemma. 
+- **intransitive_lemma_id** - The number identifier of the intransitive equivalent of a lemma. 
 
 #### `mwlu`
 
@@ -151,15 +156,15 @@ The database contains the following tables and variables:
 
 #### `dialect`
 
-- **id** - Identification code of the corresponding dialect, used as PK and FK to connect to the `lexical_unit_dialect`.
-- **name** - The name of the dialect.
+- **id** - Identification code of the corresponding dialect, used as PK and FK to connect to the `lexical_unit_dialect`. (Such as: *lhj*)
+- **name** - The name of the dialect. (Such as: *Lahijani*)
 - **western** - Boolean. Is it a western dialect?
 - **eastern** - Boolean. Is it a eastern dialect?
 
 #### `verb_form`
 
 - **form_id** - The number identifier of the verb form, used as PK and FK to connect to the `form` table.
-- **form** - The actual verb form.
+- **form** - The actual verb form. (Such as: *bukudəm*)
 - **person_id** - The code identifier of the person, used as FK to connect to the `person` table. 
 - **number_id** - The code identifier of the number, used as FK to connect to the `number` table.
 - **tense_id** - The code identifier of the tense, used as FK to connect to the `tense` table.
@@ -199,7 +204,6 @@ The database contains the following tables and variables:
 - **present_root** - The present root of the verb.
 - **past_root** - The past root of the verb.
 - **is_transitive** - Boolean. Is the verb transitive?
-
 
 
 ---
