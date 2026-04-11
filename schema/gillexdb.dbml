@@ -29,8 +29,8 @@ Table verb_lemma {
 
 // left empty
 Table verb_transitivity_alternation {
-    transitive_lemma_id int [ref: > verb_lemma.id]
-    intransitive_lemma_id int [ref: > verb_lemma.id]
+    transitive_lemma_id int [ref: > verb_lemma.lemma_id]
+    intransitive_lemma_id int [ref: > verb_lemma.lemma_id]
 }
 
 // done
