@@ -1,6 +1,4 @@
 form_id, form, person_id,number_id,tense_id,mood_id,aspect_id,has_aux
-1,1,sg,pastdef,ind,defl,true
-
 # simple past
 3, bukudəm, 1, sg, pst, IND, PFV, 0
 4, bukudi, 2, sg, pst, IND, PFV, 0

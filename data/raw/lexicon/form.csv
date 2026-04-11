@@ -1,6 +1,4 @@
 id, dict_entry_id, form
-1, 1, kudən dərə bum
-2, 1, kudən dərə bi
 3, 1, bukudəm
 4, 1, bukudi
 5, 1, bukudǝ
@@ -55,12 +53,12 @@ id, dict_entry_id, form
 54, 1, kudən dibim
 55, 1, kudən dubid
 56, 1, kudən dubid
-57, 1, kudən dǝrǝ
-58, 1, kudən dǝrǝ
-59, 1, kudən dǝrǝ
-60, 1, kudən dǝrǝ
-61, 1, kudən dǝrǝ
-62, 1, kudən dǝrǝ
+57, 1, kudən dǝrǝ bum
+58, 1, kudən dǝrǝ bi
+59, 1, kudən dǝrǝ bu
+60, 1, kudən dǝrǝ bim
+61, 1, kudən dǝrǝ bid
+62, 1, kudən dǝrǝ bid
 63, 1, bukudə bum
 64, 1, bukudə bi
 65, 1, bukudə bu

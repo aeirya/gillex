@@ -82,6 +82,7 @@ Table form {
 // done
 Table verb_form {
   form_id int [pk, ref: > form.id]
+  form text
   person_id text [ref: > person.person_id]
   number_id text [ref: > number.number_id]
   tense_id text [ref: > tense.tense_id]
