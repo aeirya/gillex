@@ -21,7 +21,7 @@ Table dict_entry {
 
 // done
 Table verb_lemma {
-    id int [pk, ref: > dict_entry.id]
+    lemma_id int [pk, ref: > lemma.id]
     present_root text
     past_root text
     is_transitive boolean
@@ -29,8 +29,8 @@ Table verb_lemma {
 
 // left empty
 Table verb_transitivity_alternation {
-    transitive_id int [ref: > verb_lemma.id]
-    intransitive_id int [ref: > verb_lemma.id]
+    transitive_lemma_id int [ref: > verb_lemma.id]
+    intransitive_lemma_id int [ref: > verb_lemma.id]
 }
 
 // done
@@ -50,6 +50,7 @@ Table lexical_unit_dialects {
 
 Table morpheme {
   id int [pk]
+  morpheme text
   is_prefix boolean
   is_suffix boolean
 }
