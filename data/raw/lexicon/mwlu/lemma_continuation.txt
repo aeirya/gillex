@@ -1,0 +1,44 @@
+NOUN
+    _   nouns: e.g. use
+
+V_DER_PRF
+    STEM
+    NEG_AFX
+
+NEG_AFX
+    -       negative affix after derivational morphemes
+    STEM    du-n-kudǝn
+
+V_INFL_PRF
+    B_PRF
+    NEG_PRF
+
+NEG_PRF
+    STEM    nu-kudǝm, nu-kunǝm
+
+B_PRF
+    STEM    bu-kudǝm
+
+STEM
+   PST_STEM     kud
+   PRS_STEM     kun
+
+PST_STEM
+    PST_PER_NO  kud-ǝm
+    
+PRS_STEM
+    PRS_PER_NO  kun-ǝm
+
+PST_PER_NO
+    CON_OBJ
+
+PRS_PER_NO
+    CON_OBJ
+
+CON_OBJ
+    _       connected objects
+    nil     ǝš, ...  
+
+KUDAN
+    _       NOUN + to do
+    
