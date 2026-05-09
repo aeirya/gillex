@@ -2,6 +2,13 @@
 
 This note turns the report feedback into concrete schema decisions.
 
+## Layering Policy
+
+Gillex has one schema and two data layers. The `core` layer is the small
+report-facing dataset in `data/raw/v2`. The `full` layer appends optional rows
+from `data/raw/v2_extensions` using the same table names and columns. This keeps
+the academic explanation focused while still showing that the database can grow.
+
 ## Main Changes
 
 - `lexical_unit` is the central identity table for lemmas, dictionary entries, forms, morphemes, and multiword lexical units.
@@ -47,3 +54,10 @@ Example: `xǝndǝ kudǝn` "to laugh" consists of `xǝndǝ` plus the light verb `
 Continuation classes describe legal morphotactic paths. A root can start in `V_ROOT`; negation may keep it in `V_ROOT`; an agreement suffix may lead to `FINAL`.
 
 Example path: `kun` + `nǝ-` + `-əm` produces a negative first-person singular form.
+
+## Validation and Exports
+
+Run `python3 scripts/build_dataset.py --layer core` before submission. It checks
+that CSV headers match the DBML schema, required columns are filled, primary keys
+are unique, and foreign-key-style references resolve. It also creates a SQLite
+inspection database and small TSV/JSON exports for report tables and examples.

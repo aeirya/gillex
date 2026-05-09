@@ -1,0 +1,9 @@
+form	segmentation	morpheme_gloss	lemma	lemma_gloss	english_translation	person	number	mood	tense	aspect	polarity	generation_status
+bukudəm	bu+kud+əm	PFV+do.PST+1SG	kudǝn	to do	I did	1	sg	indicative	past neutral	perfective	positive	attested
+nǝkunəm	nǝ+kun+əm	NEG+do.PRS+1SG	kudǝn	to do	I do not do	1	sg	indicative	present-future	imperfective	negative	attested
+kunəm	kun+əm	do.PRS+1SG	kudǝn	to do	I do	1	sg	indicative	present-future	imperfective	positive	attested
+kudim			kudǝn	to do	I was doing	1	sg	indicative	past continuous	imperfective	positive	attested
+nukudəm	nu+kud+əm	NEG+do.PST+1SG	kudǝn	to do	I did not do	1	sg	indicative	past neutral	perfective	negative	attested
+kudən dǝrəm			kudǝn	to do	I am doing	1	sg	indicative	present definite	imperfective	positive	attested
+xayəm kudən			kudǝn	to do	I will do	1	sg	indicative	future categoric	imperfective	positive	attested
+kudən dubum			kudǝn	to do	I did / I had done	1	sg	indicative	past definite	imperfective	positive	attested

@@ -1,0 +1,4 @@
+id,mood_id,tense_id,aspect_id,label,notes
+ind_fut_cat_ipfv,ind,fut_cat,ipfv,future categoric indicative imperfective,optional extension TAM label
+ind_pst_def_ipfv,ind,pst_def,ipfv,past definite indicative imperfective,optional extension TAM label
+

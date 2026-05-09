@@ -410,7 +410,7 @@ Table lemma_continuation_class {
   notes text
 
   indexes {
-    (lemma_id, class_id) [pk]
+    (lemma_id, class_id, lexical_form) [pk]
   }
 }
 

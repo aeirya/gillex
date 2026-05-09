@@ -1,0 +1,47 @@
+name: gillex
+title: GilLex: Gilaki Verb Lexical Database
+version: 0.1.0
+
+description: >
+  A prototype lexical database for Gilaki verbal morphology. The core layer is
+  the report-facing academic dataset; optional extension rows demonstrate how
+  the same schema can scale.
+
+language:
+  name: Gilaki
+  iso639_3: glk
+  family: Northwestern Iranian
+
+scripts:
+  - Arabic
+  - Latin
+
+creators:
+  - name: Aeirya Mohammadi
+    email: aeirya@gmail.com
+    affiliation: University of the Basque Country (UPV/EHU)
+
+project:
+  course: Building Language Resources
+  institution: University of the Basque Country (UPV/EHU)
+
+inspiration:
+  - EDBL (Basque Lexical Database)
+
+licenses:
+  code: MIT
+  lexical_data_recommended: CC BY 4.0
+  lexical_data_alternative: CC BY-SA 4.0
+
+formats:
+  - DBML
+  - CSV
+  - TSV
+  - JSON
+  - SQLite
+
+layers:
+  core: data/raw/v2
+  full: data/raw/v2 plus data/raw/v2_extensions
+
+encoding: UTF-8

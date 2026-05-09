@@ -1,0 +1,4 @@
+from_class	morpheme	to_class	feature_constraint	output_feature	notes
+Verb root	nǝ	Verb root	polarity=neg	polarity=neg	optional negation prefix
+Verb root	əm	Final	person=1;number=sg	person=1;number=sg	1sg agreement suffix
+Verb root		Agreement suffix slot			slot transition when suffix is chosen later

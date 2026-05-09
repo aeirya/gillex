@@ -1,6 +1,6 @@
-lexical_unit_id, dict_entry_id, form_kind_id    , generation_status_id, source_id, confidence, notes
-              3,             1, inflected       , attested            ,         2,        1.0, past neutral indicative 1sg
-              4,             1, inflected       , attested            ,         2,        1.0, negative present-future indicative 1sg
-             11,             1, inflected       , attested            ,         2,        1.0, present-future indicative 1sg
-             12,             1, inflected       , attested            ,         2,        1.0, past continuous 1sg or 1pl
-             10,             1, spelling_variant, normalized          ,         2,        0.8, variant spelling linked to kudǝn
+lexical_unit_id,dict_entry_id,form_kind_id,generation_status_id,source_id,confidence,notes
+3,1,inflected,attested,2,1.0,past neutral indicative 1sg
+4,1,inflected,attested,2,1.0,negative present-future indicative 1sg
+11,1,inflected,attested,2,1.0,present-future indicative 1sg
+12,1,inflected,attested,2,1.0,past continuous 1sg or 1pl
+10,1,spelling_variant,normalized,2,0.8,variant spelling linked to kudǝn

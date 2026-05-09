@@ -1,6 +1,6 @@
-id, dict_entry_id, language_id, gloss      , is_primary, source_id
- 1,             1, en         , to do      , true      ,         2
- 2,             2, en         , to give    , true      ,         2
- 3,             8, en         , to laugh   , true      ,         2
- 4,             9, en         , laughter   , true      ,         2
- 5,            14, en         , to put down, false     ,         2
+id,dict_entry_id,language_id,gloss,is_primary,source_id
+1,1,en,to do,true,2
+2,2,en,to give,true,2
+3,8,en,to laugh,true,2
+4,9,en,laughter,true,2
+5,14,en,to put down,false,2
