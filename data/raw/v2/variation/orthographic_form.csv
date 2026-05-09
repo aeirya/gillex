@@ -1,0 +1,4 @@
+id,lexical_unit_id,orthography_id,written_form,dialect_id,is_primary,source_id,notes
+1,1,rastorgueva,kudǝn,,true,2,project-normalized spelling
+2,1,rastorgueva,kudan,,false,2,ASCII-friendly variant
+3,8,rastorgueva,xǝndǝ kudǝn,,true,2,project-normalized compound spelling

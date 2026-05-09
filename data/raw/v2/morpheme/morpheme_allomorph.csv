@@ -1,0 +1,7 @@
+id,morpheme_id,allomorph,orthography_id,dialect_id,environment,source_id,notes
+1,6,nǝ,rastorgueva,,default/seed environment,2,negative prefix allomorph
+2,6,ni,rastorgueva,,phonologically conditioned,2,negative prefix allomorph
+3,6,nu,rastorgueva,,phonologically conditioned,2,negative prefix allomorph
+4,7,əm,rastorgueva,,1sg,2,agreement suffix
+5,5,dǝ,rastorgueva,,,2,derivational prefix
+6,13,fǝ,rastorgueva,,,2,derivational prefix

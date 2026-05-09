@@ -1,0 +1,5 @@
+form_id,verb_lemma_id,tam_id,person_id,number_id,polarity_id,auxiliary_verb_lemma_id,notes
+3,1,ind_pst_neut_pfv,1,sg,pos,,bukudəm
+4,1,ind_prs_fut_ipfv,1,sg,neg,,nǝkunəm
+11,1,ind_prs_fut_ipfv,1,sg,pos,,kunəm
+12,1,ind_pst_cont_ipfv,1,sg,pos,,kudim

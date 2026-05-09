@@ -1,0 +1,5 @@
+lexical_unit_id,dialect_id,status_id,source_id,notes
+1,west,normalized,2,usable as shared seed form
+1,east,normalized,2,usable as shared seed form
+8,west,normalized,2,compound example
+10,rsht,variant,2,example variant assignment

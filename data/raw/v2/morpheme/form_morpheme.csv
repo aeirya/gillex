@@ -1,0 +1,9 @@
+form_id,component_no,morpheme_id,surface,gloss,notes
+3,1,,bu,PFV,perfective or preterite prefix candidate; verify analysis
+3,2,,kud,do.PST,past root from kudǝn
+3,3,7,əm,1SG,first singular agreement suffix
+4,1,6,nǝ,NEG,negative prefix allomorph
+4,2,,kun,do.PRS,present root from kudǝn
+4,3,7,əm,1SG,first singular agreement suffix
+11,1,,kun,do.PRS,present root from kudǝn
+11,2,7,əm,1SG,first singular agreement suffix

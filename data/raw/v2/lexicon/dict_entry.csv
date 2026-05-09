@@ -1,0 +1,6 @@
+lexical_unit_id, lemma_id, pos_id, entry_no, usage_label, source_id, notes
+              1,        1, VERB  ,        1,            ,         2, main entry for kudǝn
+              2,        2, VERB  ,        1,            ,         2, main entry for daan
+              8,        8, VERB  ,        1, compound   ,         2, compound predicate entry
+              9,        9, NOUN  ,        1,            ,         2, noun component entry
+             14,       14, VERB  ,        1, derived    ,         2, prefixed verb entry

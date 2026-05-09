@@ -1,0 +1,6 @@
+id,label
+intr,intransitive
+tr,transitive
+ditr,ditransitive
+ambitr,ambitransitive
+unknown,unknown

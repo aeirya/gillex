@@ -1,0 +1,3 @@
+id,name,script,is_normalized,notes
+rastorgueva,Rastorgueva transcription,Latin,true,G2P-oriented project default
+perso_arabic,Perso-Arabic Gilaki,Arabic,false,Future surface spelling layer

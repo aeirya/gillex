@@ -1,0 +1,4 @@
+id,from_class_id,morpheme_id,to_class_id,slot_no,feature_constraint,output_feature,notes
+1,V_ROOT,6,V_ROOT,1,polarity=neg,polarity=neg,optional negation prefix
+2,V_ROOT,7,FINAL,2,person=1;number=sg,person=1;number=sg,1sg agreement suffix
+3,V_ROOT,,AGR_SUFFIX,2,,,"slot transition when suffix is chosen later"

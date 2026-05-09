@@ -1,0 +1,7 @@
+id,mood_id,tense_id,aspect_id,label,notes
+ind_pst_neut_pfv,ind,pst_neut,pfv,past neutral indicative perfective,
+ind_prs_fut_ipfv,ind,prs_fut,ipfv,present-future indicative imperfective,
+ind_pst_cont_ipfv,ind,pst_cont,ipfv,past continuous indicative imperfective,
+ind_prs_def_ipfv,ind,prs_def,ipfv,present definite indicative imperfective,
+subj_prs_aor,subj,subj_prs,pfv,subjunctive present/aorist,
+imp,imp,,neutral,imperative,

@@ -1,0 +1,3 @@
+mwlu_id,component_no,component_lexical_unit_id,literal_form,role_id,can_inflect,inflects_like_lemma_id,is_optional,notes
+8,1,9,xǝndǝ,noun_component,false,,false,nonverbal predicate component
+8,2,1,kudǝn,light_verb,true,1,false,inflects like kudǝn

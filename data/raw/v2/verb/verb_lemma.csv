@@ -1,0 +1,5 @@
+dict_entry_id,present_root,past_root,transitivity_id,stem_source_verb_id,is_auxiliary,notes
+1,kun,kud,ambitr,,false,old seed has this as intransitive; ambitransitive may be safer for do
+2,de,da,tr,,false,
+8,xǝndǝ kun,xǝndǝ kud,intr,1,false,compound uses kudǝn as light verb
+14,fade,fad,tr,2,false,tentative derived-verb example for prefix modeling

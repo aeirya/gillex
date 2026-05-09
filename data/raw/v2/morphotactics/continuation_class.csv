@@ -1,0 +1,5 @@
+id,name,description
+V_ROOT,Verb root,Starting class for verb roots
+NEG_PREFIX,Negative prefix slot,Optional negative prefix before verb stem
+AGR_SUFFIX,Agreement suffix slot,Person-number endings
+FINAL,Final,Terminal class

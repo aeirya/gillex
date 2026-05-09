@@ -1,0 +1,7 @@
+id,name,group_id,parent_id,notes
+west,Biepas,west,,Western macro-variety
+east,Biepish,east,,Eastern macro-variety
+rsht,Rashti,west,west,
+lhj,Lahijani,east,east,
+lng,Langerudi,east,east,
+gal,Galeshi,other,,

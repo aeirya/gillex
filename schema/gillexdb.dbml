@@ -1,145 +1,430 @@
-// done
+Project gillex {
+  database_type: 'PostgreSQL'
+  Note: '''
+    Gillex lexical database for Gilaki verbal morphology.
+    The schema keeps the manually edited lexicon normalized and small,
+    while generated NLP exports should be built as views/materialized tables.
+  '''
+}
+
+Table source {
+  id int [pk]
+  short_name text [not null, unique]
+  citation text
+  uri text
+  notes text
+}
+
+Table language {
+  id text [pk] // fa, en, glk, ...
+  name text [not null, unique]
+}
+
+Table pos {
+  id text [pk] // VERB, NOUN, ADJ, ...
+  label text [not null, unique]
+}
+
+Table orthography_system {
+  id text [pk] // rastorgueva, perso_arabic, ipa, ...
+  name text [not null, unique]
+  script text
+  is_normalized boolean [not null, default: false]
+  notes text
+}
+
+Table lexical_status {
+  id text [pk] // normalized, variant, nonstandard, reconstructed, deprecated
+  label text [not null, unique]
+}
+
 Table lexical_unit {
-    id int [pk]
-    is_inflected boolean
-    is_dialect boolean
-    is_mwlu boolean
-}
-
-// done (4)
-Table lemma {
   id int [pk]
-  lemma text [unique]
-}
-
-// done
-Table dict_entry {
-    id int [pk]
-    lemma_id int [ref: > lemma.id]
-    pos text
-}
-
-// done
-Table verb_lemma {
-    lemma_id int [pk, ref: > lemma.id]
-    present_root text
-    past_root text
-    is_transitive boolean
-}
-
-// left empty
-Table verb_transitivity_alternation {
-    transitive_lemma_id int [ref: > verb_lemma.lemma_id]
-    intransitive_lemma_id int [ref: > verb_lemma.lemma_id]
-}
-
-// done
-Table dialect {
-  id int [pk]
-  name text
-  western boolean
-  eastern boolean
-}
-
-// done
-Table lexical_unit_dialects {
-  lexical_unit_id int [ref: > lexical_unit.id]
-  dialect_id int [ref: > dialect.id]
-}
-
-
-Table morpheme {
-  id int [pk]
-  morpheme text
-  is_prefix boolean
-  is_suffix boolean
-}
-
-Table prefix_morpheme {
-  id int [ref: > morpheme.id]
-  is_derivational boolean
-}
-
-// done
-Table suffix_morpheme {
-  id int [ref: > morpheme.id]
-  is_person_number boolean
-  is_object boolean
-}
-
-Table mwlu {
-    id int [pk, ref: > lexical_unit.id]
-    class text
-}
-
-// done
-Table form {
-  id int [pk, ref: > lexical_unit.id]
-  form text
-  dict_entry int [ref: > dict_entry.id]
-}
-
-// done
-Table verb_form {
-  form_id int [pk, ref: > form.id]
-  form text
-  person_id text [ref: > person.person_id]
-  number_id text [ref: > number.number_id]
-  tense_id text [ref: > tense.tense_id]
-  mood_id text [ref: > mood.mood_id]
-  aspect_id text [ref: > aspect.aspect_id]
-  has_aux boolean
+  canonical_form text [not null]
+  orthography_id text [not null, ref: > orthography_system.id]
+  homograph_no int [not null, default: 1]
+  status_id text [not null, ref: > lexical_status.id]
+  source_id int [ref: > source.id]
+  notes text
 
   indexes {
-    (person_id, number_id, tense_id, mood_id, aspect_id)
+    (canonical_form, orthography_id, homograph_no) [unique]
+    status_id
   }
 }
 
-// done
-Table person {
-  person_id int [pk]
-  value text
+Table lemma {
+  lexical_unit_id int [pk, ref: > lexical_unit.id]
+  citation_form text [not null]
+  notes text
 }
 
-// done
-Table number {
-  number_id text [pk]
-  value text
+Table dict_entry {
+  lexical_unit_id int [pk, ref: > lexical_unit.id]
+  lemma_id int [not null, ref: > lemma.lexical_unit_id]
+  pos_id text [not null, ref: > pos.id]
+  entry_no int [not null, default: 1]
+  usage_label text
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (lemma_id, pos_id, entry_no) [unique]
+    pos_id
+  }
 }
 
-// done
-Table tense {
-  tense_id text [pk]
-  value text
-}
-
-// done
-Table mood {
-  mood_id text [pk]
-  value text
-}
-
-// done
-Table aspect {
-  aspect_id text [pk]
-  value text
-}
-
-// done 
 Table gloss {
   id int [pk]
-  lexical_unit_id int [ref: > lexical_unit.id]
-  language_id text
-  gloss text
+  dict_entry_id int [not null, ref: > dict_entry.lexical_unit_id]
+  language_id text [not null, ref: > language.id]
+  gloss text [not null]
+  is_primary boolean [not null, default: true]
+  source_id int [ref: > source.id]
+
+  indexes {
+    (dict_entry_id, language_id, gloss) [unique]
+  }
 }
 
-// // continuation class
-// Table continuation_class {
-//   id int [pk]
-//   name text
-// }
+Table form_kind {
+  id text [pk] // citation, inflected, stem, spelling_variant, surface_variant
+  label text [not null, unique]
+}
 
-// Table lemma_continuation {
-//   lemma_id int
-//   continuation_id int
-// }
+Table generation_status {
+  id text [pk] // attested, generated, predicted, rejected, normalized
+  label text [not null, unique]
+}
+
+Table form {
+  lexical_unit_id int [pk, ref: > lexical_unit.id]
+  dict_entry_id int [not null, ref: > dict_entry.lexical_unit_id]
+  form_kind_id text [not null, ref: > form_kind.id]
+  generation_status_id text [not null, ref: > generation_status.id]
+  source_id int [ref: > source.id]
+  confidence numeric
+  notes text
+
+  indexes {
+    (dict_entry_id, lexical_unit_id) [unique]
+    generation_status_id
+    form_kind_id
+  }
+}
+
+Table dialect_group {
+  id text [pk] // west, east, central, ...
+  name text [not null, unique]
+}
+
+Table dialect {
+  id text [pk]
+  name text [not null, unique]
+  group_id text [ref: > dialect_group.id]
+  parent_id text [ref: > dialect.id]
+  notes text
+}
+
+Table lexical_unit_dialect {
+  lexical_unit_id int [not null, ref: > lexical_unit.id]
+  dialect_id text [not null, ref: > dialect.id]
+  status_id text [ref: > lexical_status.id]
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (lexical_unit_id, dialect_id) [pk]
+    dialect_id
+  }
+}
+
+Table variant_type {
+  id text [pk] // dialectal, orthographic, phonological, nonstandard, allomorph
+  label text [not null, unique]
+}
+
+Table lexical_unit_variant {
+  base_lexical_unit_id int [not null, ref: > lexical_unit.id]
+  variant_lexical_unit_id int [not null, ref: > lexical_unit.id]
+  variant_type_id text [not null, ref: > variant_type.id]
+  dialect_id text [ref: > dialect.id]
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (base_lexical_unit_id, variant_lexical_unit_id, variant_type_id) [pk]
+    variant_lexical_unit_id
+  }
+}
+
+Table orthographic_form {
+  id int [pk]
+  lexical_unit_id int [not null, ref: > lexical_unit.id]
+  orthography_id text [not null, ref: > orthography_system.id]
+  written_form text [not null]
+  dialect_id text [ref: > dialect.id]
+  is_primary boolean [not null, default: false]
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (lexical_unit_id, orthography_id, written_form, dialect_id) [unique]
+    written_form
+  }
+}
+
+Table transitivity_type {
+  id text [pk] // intr, tr, ditr, ambitr, unknown
+  label text [not null, unique]
+}
+
+Table verb_lemma {
+  dict_entry_id int [pk, ref: > dict_entry.lexical_unit_id]
+  present_root text
+  past_root text
+  transitivity_id text [ref: > transitivity_type.id]
+  stem_source_verb_id int [ref: > verb_lemma.dict_entry_id]
+  is_auxiliary boolean [not null, default: false]
+  notes text
+}
+
+Table verb_transitivity_alternation {
+  verb_lemma_id int [not null, ref: > verb_lemma.dict_entry_id]
+  alternant_verb_lemma_id int [not null, ref: > verb_lemma.dict_entry_id]
+  alternation_type text [not null] // causative, anticausative, labile, ...
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (verb_lemma_id, alternant_verb_lemma_id, alternation_type) [pk]
+  }
+}
+
+Table person {
+  id text [pk] // 1, 2, 3
+  label text [not null, unique]
+}
+
+Table grammatical_number {
+  id text [pk] // sg, pl
+  label text [not null, unique]
+}
+
+Table mood {
+  id text [pk] // ind, subj, imp
+  label text [not null, unique]
+}
+
+Table tense {
+  id text [pk] // pres_fut, pres_def, fut_cat, pst_neut, pst_cont, pst_def, plup
+  label text [not null, unique]
+}
+
+Table aspect {
+  id text [pk] // ipfv, pfv, prog, neutral
+  label text [not null, unique]
+}
+
+Table polarity {
+  id text [pk] // pos, neg
+  label text [not null, unique]
+}
+
+Table verb_tam {
+  id text [pk]
+  mood_id text [not null, ref: > mood.id]
+  tense_id text [ref: > tense.id]
+  aspect_id text [ref: > aspect.id]
+  label text [not null, unique]
+  notes text
+
+  indexes {
+    (mood_id, tense_id, aspect_id) [unique]
+  }
+}
+
+Table verb_form {
+  form_id int [pk, ref: > form.lexical_unit_id]
+  verb_lemma_id int [not null, ref: > verb_lemma.dict_entry_id]
+  tam_id text [not null, ref: > verb_tam.id]
+  person_id text [ref: > person.id]
+  number_id text [ref: > grammatical_number.id]
+  polarity_id text [not null, ref: > polarity.id]
+  auxiliary_verb_lemma_id int [ref: > verb_lemma.dict_entry_id]
+  notes text
+
+  indexes {
+    (verb_lemma_id, tam_id, person_id, number_id, polarity_id) [unique]
+    tam_id
+  }
+}
+
+Table morpheme_type {
+  id text [pk] // prefix, suffix, circumfix, clitic
+  label text [not null, unique]
+}
+
+Table morpheme_function {
+  id text [pk] // derivational, inflectional, negation, person_number, object, aspect
+  label text [not null, unique]
+}
+
+Table morpheme {
+  lexical_unit_id int [pk, ref: > lexical_unit.id]
+  morpheme_type_id text [not null, ref: > morpheme_type.id]
+  function_id text [not null, ref: > morpheme_function.id]
+  gloss text
+  notes text
+}
+
+Table morpheme_allomorph {
+  id int [pk]
+  morpheme_id int [not null, ref: > morpheme.lexical_unit_id]
+  allomorph text [not null]
+  orthography_id text [not null, ref: > orthography_system.id]
+  dialect_id text [ref: > dialect.id]
+  environment text // e.g. vowel harmony, following segment, tense/mood context
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    (morpheme_id, allomorph, orthography_id, dialect_id) [unique]
+  }
+}
+
+Table form_morpheme {
+  form_id int [not null, ref: > form.lexical_unit_id]
+  component_no int [not null]
+  morpheme_id int [ref: > morpheme.lexical_unit_id]
+  surface text [not null]
+  gloss text
+  notes text
+
+  indexes {
+    (form_id, component_no) [pk]
+    morpheme_id
+  }
+}
+
+Table derivation_pattern {
+  id text [pk]
+  name text [not null, unique]
+  description text
+}
+
+Table verb_derivation {
+  id int [pk]
+  derived_verb_lemma_id int [not null, ref: > verb_lemma.dict_entry_id]
+  base_lemma_id int [ref: > lemma.lexical_unit_id]
+  pattern_id text [ref: > derivation_pattern.id]
+  source_id int [ref: > source.id]
+  notes text
+
+  indexes {
+    derived_verb_lemma_id [unique]
+  }
+}
+
+Table verb_derivation_morpheme {
+  derivation_id int [not null, ref: > verb_derivation.id]
+  morpheme_id int [not null, ref: > morpheme.lexical_unit_id]
+  position_no int [not null]
+
+  indexes {
+    (derivation_id, position_no) [pk]
+    morpheme_id
+  }
+}
+
+Table mwlu_type {
+  id text [pk] // compound_verb, idiom, collocation, periphrastic_form
+  label text [not null, unique]
+}
+
+Table multiword_lexical_unit {
+  lexical_unit_id int [pk, ref: > lexical_unit.id]
+  mwlu_type_id text [not null, ref: > mwlu_type.id]
+  fixedness text // fixed, semi_fixed, open_slot
+  notes text
+}
+
+Table mwlu_component_role {
+  id text [pk] // head, light_verb, noun_component, particle, modifier, open_slot
+  label text [not null, unique]
+}
+
+Table mwlu_component {
+  mwlu_id int [not null, ref: > multiword_lexical_unit.lexical_unit_id]
+  component_no int [not null]
+  component_lexical_unit_id int [ref: > lexical_unit.id]
+  literal_form text
+  role_id text [ref: > mwlu_component_role.id]
+  can_inflect boolean [not null, default: false]
+  inflects_like_lemma_id int [ref: > lemma.lexical_unit_id]
+  is_optional boolean [not null, default: false]
+  notes text
+
+  indexes {
+    (mwlu_id, component_no) [pk]
+    component_lexical_unit_id
+  }
+}
+
+Table mwlu_surface_pattern {
+  id int [pk]
+  mwlu_id int [not null, ref: > multiword_lexical_unit.lexical_unit_id]
+  pattern text [not null]
+  is_contiguous boolean [not null, default: true]
+  is_order_fixed boolean [not null, default: true]
+  notes text
+
+  indexes {
+    (mwlu_id, pattern) [unique]
+  }
+}
+
+Table compound_verb {
+  verb_lemma_id int [pk, ref: > verb_lemma.dict_entry_id]
+  mwlu_id int [not null, ref: > multiword_lexical_unit.lexical_unit_id]
+  light_verb_lemma_id int [ref: > verb_lemma.dict_entry_id]
+  nonverbal_head_lu_id int [ref: > lexical_unit.id]
+  notes text
+
+  indexes {
+    mwlu_id [unique]
+    light_verb_lemma_id
+  }
+}
+
+Table continuation_class {
+  id text [pk]
+  name text [not null, unique]
+  description text
+}
+
+Table lemma_continuation_class {
+  lemma_id int [not null, ref: > lemma.lexical_unit_id]
+  class_id text [not null, ref: > continuation_class.id]
+  lexical_form text
+  notes text
+
+  indexes {
+    (lemma_id, class_id) [pk]
+  }
+}
+
+Table continuation_arc {
+  id int [pk]
+  from_class_id text [not null, ref: > continuation_class.id]
+  morpheme_id int [ref: > morpheme.lexical_unit_id]
+  to_class_id text [ref: > continuation_class.id]
+  slot_no int
+  feature_constraint text
+  output_feature text
+  notes text
+
+  indexes {
+    (from_class_id, morpheme_id, to_class_id, slot_no) [unique]
+  }
+}
