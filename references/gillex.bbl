@@ -1,0 +1,35 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aduriz et~al.(1998)Aduriz, Aldezabal, Alegria, Artola, Ezeiza, and
+  Urizar]{aduriz1998edbl}
+Itziar Aduriz, Izaskun Aldezabal, I{\~n}aki Alegria, Xabier Artola, Nerea
+  Ezeiza, and Ruben Urizar.
+\newblock Edbl: A multi-purposed lexical support for the treatment of basque.
+\newblock In \emph{Proceedings of LREC}, 1998.
+
+\bibitem[Aldezabal et~al.(2001)Aldezabal, Ansa, Arrieta, Artola, Ezeiza,
+  Hern{\\'a}ndez, and Lersundi]{aldezabal2001edbl}
+Izaskun Aldezabal, Olatz Ansa, Bertol Arrieta, Xabier Artola, Arantza Ezeiza,
+  Gregorio Hern{\\'a}ndez, and Mikel Lersundi.
+\newblock Edbl: A general lexical basis for the automatic processing of basque.
+\newblock In \emph{Proceedings of the IRCS Workshop on Linguistic Databases},
+  2001.
+
+\bibitem[Ivanov(2015)]{ivanov2015gilaki}
+Vyacheslav Ivanov.
+\newblock Gilaki, 2015.
+\newblock Reference work on Iranian languages.
+
+\bibitem[Rastorgueva et~al.(2012)Rastorgueva, Kerimova, Mamedzade, Pireiko, and
+  Edelman]{rastorgueva2012gilaki}
+Vera~S. Rastorgueva, A.~A. Kerimova, A.~K. Mamedzade, L.~A. Pireiko, and D.~I.
+  Edelman.
+\newblock \emph{The Gilaki Language}.
+\newblock Uppsala University, 2012.
+
+\end{thebibliography}
