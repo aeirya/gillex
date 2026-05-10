@@ -1,0 +1,306 @@
+\documentclass[11pt]{article}
+
+\usepackage[final]{acl}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tipa}
+\usepackage{tabularx}
+\usepackage{array}
+
+\newcommand{\schwa}{\raisebox{0.15ex}{\rotatebox[origin=c]{180}{e}}}
+\DeclareUnicodeCharacter{01DD}{\schwa}
+\newcommand{\gil}[1]{\textit{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\title{Gillex: A Lexical Database for Gilaki Verbal Morphology}
+
+\author{Gabriel Pišvejc \\
+  UPV/EHU \\
+  \texttt{gabrielpisvejc@protonmail.com} \\\And
+  Aeirya Mohammadi \\
+  UPV/EHU \\
+  \texttt{aeiryam@gmail.com} \\\And
+  Naeem Bashir \\
+  UPV/EHU \\
+  \texttt{naeembashir63@gmail.com} \\}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Gillex is a prototype lexical database for Gilaki, a low-resource Northwestern Iranian language spoken mainly in Gilan Province, Iran. The resource focuses on verbal morphology and is designed for manual maintenance, relational inspection, and export to downstream NLP tools. Inspired by the academic design principles of the Basque EDBL lexical database, Gillex uses a shared lexical-unit identity layer with optional specialized tables for dictionary entries, morphemes, verb lemmas, inflected forms, multiword lexical units, dialectal variants, and continuation classes. This paper describes the linguistic motivation, methodology, database architecture, current prototype coverage, export strategy, data statement, limitations, and licensing plan.
+\end{abstract}
+
+\section{Introduction}
+
+Gilaki is a Northwestern Iranian language spoken by the Gilak population of Gilan Province on the southern coast of the Caspian Sea. Estimates commonly place the speaker population at approximately three million \cite{ivanov2015gilaki}. Gilaki speakers are usually bilingual in Persian, and Persian has long functioned as the dominant official and written language in the region. This sociolinguistic situation contributes to the limited availability of computational resources for Gilaki.
+
+Gillex addresses this gap by building a small public lexical resource centered on Gilaki verbal morphology. The resource is not intended only as a list of words. It is structured lexical infrastructure: entries can be queried by lemma, form, morpheme, dialect, morphological feature, or export class. The immediate aim is to provide a clear prototype for documenting Gilaki verb lemmas, stems, morphemes, inflected forms, compound verbs, and dialectal or orthographic variants. The intended users are language-resource students, lexicographers, NLP researchers, and future developers of Gilaki morphological analyzers or lexicons.
+
+EDBL, the Basque lexical database, is useful here as a model for academic coverage and modular lexical-resource design \cite{aduriz1998edbl, aldezabal2001edbl}. Gillex does not reproduce EDBL's architecture wholesale. Instead, it adapts principles that are justified for the present Gilaki prototype: a stable lexical-unit identity layer, optional specialized information, explicit relationships among tables, and continuation-class style morphotactics.
+
+The main design principles are:
+\begin{itemize}[leftmargin=*]
+    \item keep the relational schema small enough to maintain manually;
+    \item make linguistic distinctions explicit where they matter for Gilaki;
+    \item avoid treating every generated form as an independent lexical entry;
+    \item preserve dialectal and orthographic variation without duplicating full entries;
+    \item support future finite-state or two-level morphology exports.
+\end{itemize}
+
+\section{Linguistic Background}
+
+\subsection{Writing and Standardization}
+
+Gilaki does not have a single widely accepted writing system. Several writing practices exist, including Perso-Arabic based systems, but none functions as a stable standard across all speakers and domains \cite{rastorgueva2012gilaki}. This makes form comparison difficult: the same word may be written differently depending on author, dialect, source, or orthographic preference.
+
+For this reason, Gillex stores a normalized Latin transcription based on the system used by \citet{rastorgueva2012gilaki}. This choice is practical rather than prescriptive. The normalized layer gives the database a stable comparison form, while separate orthographic-form or variant tables can later store Perso-Arabic spellings, dialectal spellings, and other surface variants. The vowel table used in the earlier version of the report is preserved in Appendix~\ref{app:transcription} as a report-facing explanation of the transcription layer.
+
+\subsection{Typological Features Relevant to the Schema}
+
+Gilaki has rich verbal morphology. Verbs typically distinguish a present root and a past root. For example, the seed entry \gil{kudǝn} `to do' is represented with present root \gil{kun} and past root \gil{kud}. These two roots motivate a dedicated verb-lemma table rather than storing verbs as plain strings.
+
+Prefixes are important in the verbal system. Negation is expressed by prefixes such as \gil{na-}, \gil{ni-}, and \gil{nu-}; the consonant /n/ carries negation and the vowel is conditioned by the phonological environment. Other prefixes, such as \gil{fǝ-}, \gil{dǝ-}, \gil{vǝ-}, and \gil{hǝ-}, can participate in derivational verbal morphology. These facts motivate treating morphemes as lexical units that can also participate in derivation and continuation classes.
+
+Gilaki also has compound or light-verb constructions, broadly comparable to Persian complex predicates. In such constructions, a nonverbal element combines with a helper verb to create a verbal lexical unit. Gillex therefore includes a multiword lexical-unit subsystem and a separate compound-verb table.
+
+Dialectal variation is central. Western and Eastern Gilaki varieties differ in lexical and phonological details. Gillex avoids uninformative boolean claims such as saying every row is or is not dialectal. Instead, dialect evidence is represented relationally: a lexical unit is connected to a dialect only when there is evidence for that association.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Gilaki & Segmentation & Gloss & Translation \\
+\midrule
+\gil{kudǝn} & kudǝn & do.INF & `to do' \\
+\gil{bukudǝm} & bu+kud+ǝm & PFV+do.PST+1SG & `I did' \\
+\gil{nǝkunǝm} & nǝ+kun+ǝm & NEG+do.PRS+1SG & `I do not do' \\
+\gil{xǝndǝ kudǝn} & xǝndǝ+kudǝn & laughter+do.INF & `to laugh' \\
+\gil{gap zǝdǝn} & gap+zǝdǝn & speech+hit.INF & `to chat/talk' \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Examples illustrating the form, segmentation, gloss, and English translation conventions used in Gillex.}
+\label{tab:examples}
+\end{table}
+
+\section{Methodology and Scope}
+
+Gillex is a structured lexical-resource project rather than a corpus-annotation project. Consequently, inter-annotator agreement is not reported. The work instead follows a resource-design methodology: define a narrow linguistic scope, design guidelines for representing the relevant units, enter a small set of examples, validate the relational structure, and export reproducible report-facing views.
+
+The scope is deliberately limited to Gilaki verbal morphology. The primary unit is the lexical object: a lemma, dictionary entry, morpheme, form, or multiword expression that requires identity in the database. The main linguistic features represented are part of speech, verb roots, transitivity, tense-aspect-mood, person, number, polarity, morpheme type, dialect label, variant relation, and continuation-class behavior.
+
+The repository uses a layered release model. The \emph{core} layer is the report-facing resource: a small, clean, linguistically motivated subset that demonstrates the schema. The optional \emph{full} or extension layer contains extra rows and examples that show how the same schema can scale. These layers are not two databases. They are two reproducible builds over one canonical schema.
+
+\section{Resource Design}
+
+\subsection{Overview and Terminology}
+
+The central table is \code{lexical\_unit}. It acts as the identity layer for any lexical object that needs to be referred to elsewhere in the database. This follows the useful modular idea also found in EDBL: a general lexical unit receives additional information only when that information is relevant. In Gillex, this modularity is implemented mainly through table membership rather than a large set of subtype booleans.
+
+If a lexical-unit ID appears in \code{dict\_entry}, dictionary-entry fields apply. If it appears in \code{morpheme}, morphemic fields apply. If it appears in \code{multiword\_lexical\_unit}, multiword fields apply. If a dictionary-entry ID appears in \code{verb\_lemma}, verb-specific root and transitivity fields apply. This design keeps the schema compact and avoids many nullable columns.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabularx}{\linewidth}{lllX}
+\toprule
+Subsystem & Main table & Key relation & Purpose \\
+\midrule
+Identity & \code{lexical\_unit} & central ID & normalized identity for every stored lexical object \\
+Lemma & \code{lemma} & FK to lexical unit & citation form independent of POS/sense analysis \\
+Dictionary entry & \code{dict\_entry} & FK to lexical unit and lemma & POS/sense-level entry; can receive glosses and source information \\
+Verb lemma & \code{verb\_lemma} & FK to dictionary entry & present root, past root, transitivity, auxiliary/light-verb information \\
+Form & \code{form}, \code{verb\_form} & FK to lexical unit and dictionary entry & surface form plus person, number, polarity, and TAM analysis \\
+Morpheme & \code{morpheme} & FK to lexical unit & bound/stem morpheme with type and function \\
+MWLU & \code{multiword\_lexical\_unit} & FK to lexical unit & identity and component structure for multiword expressions \\
+Variation & \code{dialect}, variant links & relation tables & dialectal, orthographic, phonological, or nonstandard variants \\
+Morphotactics & continuation tables & relation tables & possible transitions among roots, prefixes, suffixes, and final states \\
+\bottomrule
+\end{tabularx}
+\caption{Modular architecture of Gillex. The specialized tables are consulted only when the corresponding lexical-unit role is relevant.}
+\label{tab:architecture}
+\end{table*}
+
+The separation between \code{lemma} and \code{dict\_entry} is deliberate. A lemma stores the citation form, while a dictionary entry stores the lexical analysis of that lemma, including part of speech, usage label, source, and glosses. This distinction allows the same written form to support multiple entries if future data require homographs or category ambiguity.
+
+\subsection{Morphemes}
+
+Morphemes are represented as lexical units through the \code{morpheme} table, whose primary key references \code{lexical\_unit}. This explicitly connects morphemes to the rest of the resource. A morpheme has a type, such as prefix or suffix, and a function, such as negation, derivation, or person-number agreement.
+
+Allomorphy is stored in \code{morpheme\_allomorph}. For example, the negation morpheme can have allomorphs \gil{nǝ-}, \gil{ni-}, and \gil{nu-}. The schema also includes \code{form\_morpheme}, which records the segmentation of an attested or generated form when a form-level analysis is known.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llll}
+\toprule
+Form & Morpheme & Function & Translation \\
+\midrule
+\gil{nǝ-} & NEG & negation & `not' \\
+\gil{-ǝm} & 1SG & agreement & `first singular' \\
+\gil{fǝ-} & DER & derivation & derivational prefix \\
+\bottomrule
+\end{tabular}
+\caption{Example morphemes represented as lexical units.}
+\label{tab:morpheme-examples}
+\end{table}
+
+\subsection{Verb Lemmas}
+
+The \code{verb\_lemma} table extends \code{dict\_entry}. A row in \code{dict\_entry} says that a lexical unit is a verb entry; the corresponding row in \code{verb\_lemma} adds verbal morphology: present root, past root, transitivity, auxiliary status, and possible stem-source links for compound verbs.
+
+For example, the dictionary entry \gil{kudǝn} `to do' has present root \gil{kun} and past root \gil{kud}. The compound verb \gil{xǝndǝ kudǝn} `to laugh' can point to \gil{kudǝn} as its light verb or stem-source entry.
+
+\subsection{Inflected Forms}
+
+Inflected forms are also lexical units, but they are linked to dictionary entries through \code{form}. This table records whether a form is attested, generated, predicted, normalized, or rejected. The verbal features of a form are stored in \code{verb\_form}: person, number, polarity, auxiliary verb, and a compact \code{verb\_tam} identifier for tense, aspect, and mood.
+
+This distinction is important for NLP. Manually attested forms and automatically generated forms can coexist, but they remain distinguishable. For example, \gil{bukudǝm} is linked to the entry \gil{kudǝn}; its \code{verb\_form} row marks it as first person singular, positive polarity, indicative past neutral perfective.
+
+\subsection{Multiword Lexical Units and Compound Verbs}
+
+Multiword lexical units are represented by \code{multiword\_lexical\_unit}. Their parts are stored in \code{mwlu\_component}. A component can be a lexical unit, a literal string, or both; it can also be marked as inflecting according to another lemma.
+
+Compound verbs receive an additional row in \code{compound\_verb}. For \gil{xǝndǝ kudǝn} `to laugh', \gil{xǝndǝ} is the nonverbal component and \gil{kudǝn} is the light verb. This avoids flattening compound predicates into opaque strings while still allowing them to behave as verb entries.
+
+\subsection{Dialect and Variant Handling}
+
+Dialect information is relational. The \code{dialect} table stores dialect labels, optionally grouped into Western, Eastern, or other groups. A dialect-link table associates lexical units with dialects, while a variant-link table connects normalized units to dialectal, orthographic, phonological, or nonstandard variants.
+
+This design makes the absence of dialect information explicit: if a lexical unit has no dialect row, the database does not claim dialect-specific evidence for it. Dialect marking is therefore evidence-driven rather than defaulting to an uninformative zero.
+
+\subsection{Continuation Classes}
+
+Continuation classes are a compact way to describe morphotactics: which morphemes can follow which roots or morphemes. They are widely used in finite-state morphology and are one useful idea adopted from the EDBL-inspired design.
+
+Gillex stores continuation classes in three tables. \code{continuation\_class} names the states or classes, \code{lemma\_continuation\_class} links a lemma or lexical root to a starting class, and \code{continuation\_arc} states which morpheme can move a form from one class to another. For example, a verb root such as \gil{kun} can start in a verb-root class; the negative morpheme \gil{nǝ-} can add negative polarity; the suffix \gil{-ǝm} can then add first-person singular agreement and close the form.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+From & Morpheme & To & Feature \\
+\midrule
+V\_ROOT & \gil{nǝ-} & V\_ROOT & polarity=neg \\
+V\_ROOT & \gil{-ǝm} & FINAL & person=1; number=sg \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Simplified continuation-class example for \gil{nǝ+kun+ǝm} `I do not do'.}
+\label{tab:continuation}
+\end{table}
+
+\section{Current Resource Contents}
+
+Gillex is currently a prototype resource. The core layer is the main academic deliverable and contains enough entries to demonstrate the structured-resource design. The current redesigned seed data contain 15 lexical units, 5 lemmas, 5 dictionary entries, 4 verb lemmas, 5 morphemes, 4 prefixes, 1 suffix, 5 form rows, 4 verbal-form analyses, 4 continuation classes, and 6 dialect labels. The older manually entered CSV files contain broader exploratory material, including 90 lexical units, 28 lemmas, 4 verb lemmas, 27 morphemes, 10 prefixes, 7 suffixes, 93 form rows, 82 verbal-form analyses, and 12 dialect labels.
+
+These numbers should be interpreted as prototype coverage, not as an adequate lexical resource for Gilaki. The value of the present stage is architectural and methodological: the schema supports the distinctions required for a larger manually curated database, while the core layer remains small enough to inspect in the report.
+
+\section{Export and NLP Use}
+
+The normalized relational tables are the source of truth. The repository includes generated release views so that users can inspect and reuse the resource without directly editing the database. These exports are report and NLP views, not a second database. The expected exports include:
+\begin{itemize}[leftmargin=*]
+    \item a lexical-entry table with normalized form, lemma, part of speech, and gloss information;
+    \item a verb-form table with person, number, tense, aspect, mood, polarity, and dialect information where available;
+    \item a multiword-lexical-unit export for compound-verb recognition;
+    \item a continuation-arc export that can support future finite-state morphology;
+    \item a JSON file with report examples.
+\end{itemize}
+
+A typical reproducible workflow is to build the core layer for submission and the full layer only for optional extension examples:
+\begin{quote}\small
+\code{python3 scripts/build\_dataset.py --layer core}\\
+\code{python3 scripts/build\_dataset.py --layer full}
+\end{quote}
+
+\section{Data Statement}
+
+The resource contains lexical and morphological facts about Gilaki verbs. The current data are manually curated seed entries and small extension examples based on published linguistic descriptions, especially \citet{rastorgueva2012gilaki}, and on native-speaker knowledge within the project team. The database stores normalized Latin forms, English glosses or translations, morphological segmentations, and relational links among lemmas, forms, morphemes, dialect labels, and continuation classes.
+
+The resource is not a corpus of speaker-produced texts and does not contain private or sensitive personal information. Since the project is a structured lexical resource rather than a corpus annotation task, inter-annotator agreement is not applicable. The data should be treated as a prototype for resource design and as a starting point for future expert validation.
+
+\section{Limitations}
+
+The resource currently focuses mainly on verbs. Nouns, adjectives, adverbs, pronouns, particles, and other lexical categories are not yet fully covered. They can be represented by the general \code{lexical\_unit}, \code{lemma}, and \code{dict\_entry} structure, but category-specific tables have not yet been developed.
+
+The current verb data are limited. Some examples demonstrate the schema and should be checked by fluent speakers and against primary sources before being treated as authoritative lexical content. The authors' expertise is uneven: Gabriel has formal linguistic training but no direct command of Gilaki; Aeirya is Gilak and a passive native speaker; Naeem contributes mainly technical implementation. Future work should include systematic validation by fluent speakers and specialists in Gilaki morphology.
+
+Dialect evidence is incomplete. The schema supports dialect marking, but a lexical unit should only be connected to a dialect when there is evidence for that association. Orthographic variation is also underrepresented: the current normalized Latin layer is necessary for consistency, but future versions should include more Perso-Arabic spellings and documented variants.
+
+\section{Licensing and Availability}
+
+Gillex is intended as a public language resource. The repository should state code and data licenses separately. Code and scripts can remain under the MIT License. The original lexical data created by the project should be released under CC BY 4.0, or under CC BY-SA 4.0 if a share-alike condition is desired. Source-derived material should be limited to lexical facts, short normalized forms, and citations compatible with the source materials.
+
+For an academic lexical database intended for reuse in NLP, CC BY 4.0 is usually the easiest license for downstream users. The final license choice should be confirmed with course or institutional requirements and with any restrictions attached to source materials.
+
+\section{Conclusion}
+
+Gillex presents a compact relational architecture for Gilaki verbal morphology. The revised design treats lexical units as the central identity layer, separates lemmas from dictionary entries, connects morphemes explicitly to lexical units, models verb roots and inflected forms through dedicated specialized tables, and represents dialectal variation and compound verbs relationally. The result is a small but extensible public language resource that can grow from a manually maintained prototype into exportable NLP infrastructure.
+
+\section*{Acknowledgments}
+We thank the instructors of the Language Resources course for their feedback on the first version of the project, especially regarding the need to explain the database relations, provide English translations for examples, clarify licensing, and state limitations more explicitly.
+
+\begin{thebibliography}{9}
+
+\bibitem[Aduriz et~al.(1998)]{aduriz1998edbl}
+Itziar Aduriz, Izaskun Aldezabal, I{\~n}aki Alegria, Xabier Artola, and Arantza D{\'i}az de Ilarraza. 1998.
+\newblock EDBL: A multi-purposed lexical support for the treatment of Basque.
+\newblock In \emph{Proceedings of the First International Conference on Language Resources and Evaluation (LREC)}, Granada, Spain.
+
+\bibitem[Aldezabal et~al.(2001)]{aldezabal2001edbl}
+Izaskun Aldezabal, Olatz Ansa, Bego{\~n}a Arrieta, Xabier Artola, Nerea Ezeiza, Gorka Hern{\'a}ndez, and Mikel Lersundi. 2001.
+\newblock EDBL: A general lexical basis for the automatic processing of Basque.
+\newblock In \emph{IRCS Workshop on Linguistic Databases}, Philadelphia, PA, USA.
+
+\bibitem[Ivanov and Dodykhudoeva(2015)]{ivanov2015gilaki}
+V. B. Ivanov and L. R. Dodykhudoeva. 2015.
+\newblock Socio- and ethnolinguistic features of Gilaki and Mazandarani.
+\newblock \emph{ISTINA}.
+
+\bibitem[Rastorgueva et~al.(2012)]{rastorgueva2012gilaki}
+V. S. Rastorgueva, A. A. Kerimova, A. K. Mamedzade, L. A. Pireiko, D. I. Edel'man, and R. M. Lockwood. 2012.
+\newblock \emph{The Gilaki Language}.
+\newblock Uppsala University.
+
+\end{thebibliography}
+
+\appendix
+\section{Normalized Transcription Tables}
+\label{app:transcription}
+
+The following table is retained from the first report version because it helps explain the normalized transcription layer used in the resource.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+ & \textbf{Front} & \textbf{Central} & \textbf{Back} \\
+\midrule
+Close & /i/ <i>, /i:/ <\=\i> & & /u/ <u>, /u:/ <\=u> \\
+Close-mid & & & /o/ <o>, /o:/ <o> \\
+Open-mid & /\textipa{E}/ <e>, /\textipa{E}:/ <e> & /\textipa{@}/ <\textipa{@}> & \\
+Open & /\ae/ <a> & & /\textipa{A}/ <\r{a}> \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The first report version included this vowel correspondence as a floating table; it is kept here as a compact appendix display for the normalized transcription layer.
+
+\end{document}
